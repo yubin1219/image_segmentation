@@ -359,6 +359,7 @@ history = model.fit(
     validation_steps=validation_steps
 )
 
+## Pred image 10장 확인
 idx = 0
 num_imgs=10
 for image,seg in val_dataset.take(num_imgs):
@@ -376,7 +377,7 @@ for image,seg in val_dataset.take(num_imgs):
   thr=0.5
   pred[prediction>=thr]=1
   pred[prediction<thr]=0
-  plt.imshow(pred[0,:,:1])
+  plt.imshow(pred[0,:,:,1])
   plt.show()
   idx+=1
 
@@ -404,7 +405,7 @@ for images, labels in val_dataset.take(validation_steps):
   iou=inter / union
   avg_iou+=np.sum(iou)/N_VAL
 
-  print(avg_iou)
+print(avg_iou)
 
 """U-Net like model에 pretrained VGG를 활용하여 학습하기"""
 
@@ -496,6 +497,7 @@ history2 = new_model.fit(
     validation_steps=validation_steps
 )
 
+## Pred image 10장 확인
 idx = 0
 num_imgs=10
 for image,seg in val_dataset.take(num_imgs):
@@ -542,102 +544,3 @@ for images, labels in val_dataset.take(validation_steps):
   avg_iou+=np.sum(iou)/N_VAL
 
 print(avg_iou)
-
-## Image upload 후 실행
-test_image=Image.open('IMG_4260.jpg')
-test_image=test_image.resize((224,224))
-test_image=np.array(test_image)
-test_image=test_image/255.
-
-plt.imshow(test_image)
-plt.show()
-
-test_image=np.reshape(test_image,(1,224,224,3))
-
-prediction1=new_model.predict(test_image)
-prediction1.shape
-
-pred1=np.zeros_like(prediction1)
-thr=0.5
-pred1[prediction1>=thr]=1
-pred1[prediction1<thr]=0
-
-plt.figure(figsize=(11,5))
-plt.subplot(121)
-plt.imshow(test_image[0])
-plt.subplot(122)
-plt.imshow(pred1[0,:,:,1])
-plt.show()
-
-## Image upload 후 실행
-test_image=Image.open('IMG_4261.jpg')
-test_image=test_image.resize((224,224))
-test_image=np.array(test_image)
-test_image=test_image/255.
-
-plt.imshow(test_image)
-plt.show()
-
-test_image=np.reshape(test_image,(1,224,224,3))
-
-prediction1=new_model.predict(test_image)
-prediction1.shape
-
-pred1=np.zeros_like(prediction1)
-thr=0.5
-pred1[prediction1>=thr]=1
-pred1[prediction1<thr]=0
-
-plt.figure(figsize=(11,5))
-plt.subplot(121)
-plt.imshow(test_image[0])
-plt.subplot(122)
-plt.imshow(pred1[0,:,:,1])
-plt.show()
-
-## Image upload 후 실행
-test_image=Image.open('IMG_4262.jpg')
-test_image=test_image.resize((224,224))
-test_image=np.array(test_image)
-test_image=test_image/255.
-
-test_image=np.reshape(test_image,(1,224,224,3))
-
-prediction1=new_model.predict(test_image)
-prediction1.shape
-
-pred1=np.zeros_like(prediction1)
-thr=0.5
-pred1[prediction1>=thr]=1
-pred1[prediction1<thr]=0
-
-plt.figure(figsize=(11,5))
-plt.subplot(121)
-plt.imshow(test_image[0])
-plt.subplot(122)
-plt.imshow(pred1[0,:,:,1])
-plt.show()
-
-## Image upload 후 실행
-test_image=Image.open('IMG_4193.JPG')
-test_image=test_image.resize((224,224))
-test_image=np.array(test_image)
-test_image=test_image/255.
-
-test_image=np.reshape(test_image,(1,224,224,3))
-
-prediction1=new_model.predict(test_image)
-prediction1.shape
-
-pred1=np.zeros_like(prediction1)
-thr=0.5
-pred1[prediction1>=thr]=1
-pred1[prediction1<thr]=0
-
-plt.figure(figsize=(11,5))
-plt.subplot(121)
-plt.imshow(test_image[0])
-plt.subplot(122)
-plt.imshow(pred1[0,:,:,1])
-plt.show()
-
