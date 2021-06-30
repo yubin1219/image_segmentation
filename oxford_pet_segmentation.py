@@ -451,7 +451,6 @@ def new_model():
   vgg = keras.Model(inputs, pool5_4)
   vgg.load_weights(weight_path)
 
-    
   upconv6 = Conv2DTranspose(512, 5, 2, 'SAME', activation='relu')(pool5_4)
   concat6 = Concatenate()([conv5_3, upconv6])
   conv6 = Conv2D(512, 3, 1, 'SAME', activation='relu')(concat6)
